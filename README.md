@@ -1,4 +1,4 @@
-polygongeohasher
-================
+Geohasher
+=========
 
-Generates geohashes for arbitrary polygons
+Utilizes GeoTools and geohash-java by @kungfoo to generate geohashes for arbitrary geometries.
