@@ -42,10 +42,13 @@ public class GeoHasherTest {
                 Coordinate coord = new Coordinate(lat, lng);
                 coords.add(coord);
                 String hash = GeoHash.withCharacterPrecision(lat, lng, CHARACTER_PRECISION).toBase32();
-                if (hashMap.get(hash) == null){
-                    hashMap.put(hash, new ArrayList<Coordinate>());
+                for (int i = 0; i < hash.length(); i++){
+                    String prefix = hash.substring(0, i+1);
+                    if (hashMap.get(prefix) == null){
+                        hashMap.put(prefix, new ArrayList<Coordinate>());
+                    }
+                    hashMap.get(prefix).add(coord);
                 }
-                hashMap.get(hash).add(coord);
             }
         }
     }
@@ -123,7 +126,7 @@ public class GeoHasherTest {
             }
         }
 
-        assertEquals(noHashCount, hashCount);
+        assertEquals(hashCount, noHashCount);
 
         return hashCount;
     }
